@@ -10,7 +10,7 @@
 [![Gradio](https://img.shields.io/badge/UI-Gradio-ff7c00)](https://gradio.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 </div>
----
+
 
 ## 📋 Table of Contents
 
