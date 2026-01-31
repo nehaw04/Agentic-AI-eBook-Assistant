@@ -2,14 +2,14 @@
  # 🤖 Agentic AI eBook Assistant
 
 ### Agentic RAG: Autonomous Document Intelligence System
-</div>
+
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
 [![LangGraph](https://img.shields.io/badge/Framework-LangGraph-orange)](https://github.com/langchain-ai/langgraph)
 [![VectorDB](https://img.shields.io/badge/VectorDB-Pinecone-blueviolet)](https://www.pinecone.io/)
 [![FastAPI](https://img.shields.io/badge/API-FastAPI-009688)](https://fastapi.tiangolo.com/)
 [![Gradio](https://img.shields.io/badge/UI-Gradio-ff7c00)](https://gradio.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
+</div>
 ---
 
 ## 📋 Table of Contents
