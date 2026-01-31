@@ -70,7 +70,9 @@ The core intelligence layer implements a multi-node state machine:
 - Demo-ready deployment with sharing capabilities
 
 ### Architecture Diagram
-<div align="center">
+<table align="center">
+<tr>
+<td>
 ```
 
 ┌─────────────┐
@@ -117,7 +119,9 @@ The core intelligence layer implements a multi-node state machine:
 └─────────────────────┘
 
 ```
-</div>
+</td>
+</tr>
+</table>
 ---
 
 ## 🛠️ Key Technical Challenges Solved
