@@ -1,3 +1,4 @@
+<div align="center">
  # 🤖 Agentic AI eBook Assistant
 
 ### Agentic RAG: Autonomous Document Intelligence System
