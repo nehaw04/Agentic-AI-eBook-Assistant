@@ -72,6 +72,7 @@ The core intelligence layer implements a multi-node state machine:
 ### Architecture Diagram
 
 ```
+<div align="center">
 ┌─────────────┐
 │   PDF Data  │
 └──────┬──────┘
@@ -114,6 +115,7 @@ The core intelligence layer implements a multi-node state machine:
 ┌─────────────────────┐
 │   Gradio Frontend   │
 └─────────────────────┘
+</div>
 ```
 
 ---
