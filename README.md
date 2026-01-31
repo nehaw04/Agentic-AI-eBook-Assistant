@@ -2,7 +2,7 @@
  # 🤖 Agentic AI eBook Assistant
 
 ### Agentic RAG: Autonomous Document Intelligence System
-
+</div>
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
 [![LangGraph](https://img.shields.io/badge/Framework-LangGraph-orange)](https://github.com/langchain-ai/langgraph)
 [![VectorDB](https://img.shields.io/badge/VectorDB-Pinecone-blueviolet)](https://www.pinecone.io/)
