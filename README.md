@@ -1,6 +1,6 @@
-# 🤖 Agentic RAG: Autonomous Document Intelligence System
+# 🤖 Agentic AI eBook Assistant
 
-### Built for Enterprise Executive Decision Support
+### Agentic RAG: Autonomous Document Intelligence System
 
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
 [![LangGraph](https://img.shields.io/badge/Framework-LangGraph-orange)](https://github.com/langchain-ai/langgraph)
@@ -8,6 +8,21 @@
 [![FastAPI](https://img.shields.io/badge/API-FastAPI-009688)](https://fastapi.tiangolo.com/)
 [![Gradio](https://img.shields.io/badge/UI-Gradio-ff7c00)](https://gradio.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+---
+
+## 📋 Table of Contents
+
+- [📌 Overview](#-overview)
+- [🏗️ System Architecture](#️-system-architecture)
+- [🛠️ Key Technical Challenges Solved](#️-key-technical-challenges-solved)
+- [🚀 Getting Started](#-getting-started)
+- [📊 Performance Testing](#-performance-testing)
+- [📁 Project Structure](#-project-structure)
+- [🔧 Configuration Options](#-configuration-options)
+- [🎯 Use Cases](#-use-cases)
+- [🔮 Future Enhancements](#-future-enhancements)
+- [👩‍💻 Developer](#-developer)
 
 ---
 
