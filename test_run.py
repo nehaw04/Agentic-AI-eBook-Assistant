@@ -29,7 +29,7 @@ def test_run(query: str):
 
 if __name__ == "__main__":
     # Test 1: A factual question from the PDF
-    run_test("What is the definition of Agentic AI?")
+    test_run("What is the definition of Agentic AI?")
     
     # Test 2: The 'Grounding Trap' (Something NOT in the PDF)
-    run_test("Who won the FIFA World Cup in 2022?")
+    test_run("Who won the FIFA World Cup in 2022?")
