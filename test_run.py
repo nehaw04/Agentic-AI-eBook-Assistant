@@ -32,4 +32,8 @@ if __name__ == "__main__":
     test_run("What is the definition of Agentic AI?")
     
     # Test 2: The 'Grounding Trap' (Something NOT in the PDF)
+<<<<<<< HEAD
     test_run("Who won the FIFA World Cup in 2022?")
+=======
+    run_test("Who won the FIFA World Cup in 2022?")
+>>>>>>> d7e0fe8 (Update test_run.py)
