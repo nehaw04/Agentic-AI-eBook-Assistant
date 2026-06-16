@@ -5,7 +5,7 @@ from src.graph import app
 # 1. Load keys
 load_dotenv()
 
-def run_test(query: str):
+def test_run(query: str):
     print(f"\n{'='*50}")
     print(f"USER QUESTION: {query}")
     print(f"{'='*50}")
