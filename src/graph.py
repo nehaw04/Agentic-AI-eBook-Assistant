@@ -3,7 +3,8 @@ from typing import TypedDict
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_pinecone import PineconeVectorStore
 from langgraph.graph import StateGraph, END
-from src.ingest import SlicedGeminiEmbeddings 
+from .ingest import SlicedGeminiEmbeddings
+
 
 # 1. Define the State
 class GraphState(TypedDict):
