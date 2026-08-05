@@ -16,33 +16,43 @@ class GraphState(TypedDict):
 def retrieve_node(state: GraphState):
     print("---RETRIEVING FROM PINECONE---")
     # Setup 512-dim embeddings
-    embeddings = SlicedGeminiEmbeddings(model="models/text-embedding-004")
+    embeddings = SlicedGeminiEmbeddings(model="gemini-embedding-2")
     vectorstore = PineconeVectorStore(
-        index_name=os.getenv("agentic-ai-index"), 
+        index_name=os.getenv("PINECONE_INDEX_NAME"),
         embedding=embeddings
     )
     
     docs = vectorstore.similarity_search_with_score(state["question"], k=3)
-    context_text = "\n\n".join([doc.page_content for doc, score in docs])
-    return {"context": context_text, "score": docs[0][1] if docs else 0.0}
+    if not docs:
+        return {
+            "context": "No relevant document content was found. Please upload a document and try again.",
+            "score": 0.0,
+        }
+
+    context_text = "\n\n".join(
+        [
+            f"Source: {doc.metadata.get('source', 'unknown')}\n{doc.page_content}"
+            for doc, score in docs
+        ]
+    )
+    return {"context": context_text, "score": docs[0][1]}
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 def generate_node(state: GraphState):
     print("---GENERATING ANSWER---")
     
-    # We remove 'client_options' entirely to stop the Pydantic error.
-    # We use 'gemini-1.5-flash' which is the most stable 2026 entry point.
     llm = ChatGoogleGenerativeAI(
         model="gemini-2.5-flash",
         temperature=0
-        # If you still get a 404 after this, we will try a different model name
     )
     
     prompt = (
-        f"Answer based ONLY on the context:\n"
-        f"Context: {state['context']}\n"
-        f"Question: {state['question']}"
+        "You are an expert assistant. Answer using ONLY the provided context below. "
+        "If the answer is not contained in the context, respond with 'I don't know based on the document.' "
+        "Do not invent or hallucinate facts.\n\n"
+        f"Context:\n{state['context']}\n\n"
+        f"Question:\n{state['question']}"
     )
     
     response = llm.invoke(prompt)

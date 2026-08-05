@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  agentic-ai:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+      - "7860:7860"
+    command: sh -c "python -m src.main & python src/ui.py"
+    volumes:
+      - .:/app
+    restart: unless-stopped

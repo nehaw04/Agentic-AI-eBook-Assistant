@@ -172,8 +172,8 @@ Follow these steps to set up the project locally:
    ```env
    PINECONE_API_KEY=your_pinecone_api_key_here
    GOOGLE_API_KEY=your_gemini_api_key_here
-   PINECONE_INDEX_NAME=agentic-rag-index
-   EMBEDDING_DIMENSION=512
+   PINECONE_INDEX_NAME=agentic-ai-index
+   API_URL=http://127.0.0.1:8000/ask
    ```
 
 ### Running the Application
@@ -184,19 +184,12 @@ Process and embed the eBook content into the vector database:
 python src/ingest.py
 ```
 
-#### Step 2: Launch Backend API
-Start the FastAPI server:
+#### Step 2: Launch the application
+Use Docker Compose to build and run both services together:
 ```bash
-python -m src.main
+docker compose up --build
 ```
-The API will be available at `http://localhost:8000`
-
-#### Step 3: Launch UI
-Start the Gradio interface:
-```bash
-python src/ui.py
-```
-The UI will be available at `http://localhost:7860`
+The API will be available at `http://localhost:8000` and the UI at `http://localhost:7860`
 
 ---
 

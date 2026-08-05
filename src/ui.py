@@ -1,38 +1,58 @@
-import gradio as gr
+import os
 import requests
+import gradio as gr
 
-# The URL of your running FastAPI server
-API_URL = "http://127.0.0.1:8000/ask"
+API_URL = os.getenv("API_URL", "http://127.0.0.1:8001/ask")
+UPLOAD_URL = os.getenv("UPLOAD_URL", "http://127.0.0.1:8001/upload")
+
+
+def upload_document(file):
+    if not file:
+        return "No file selected."
+
+    path = file if isinstance(file, str) else file.name
+    try:
+        with open(path, "rb") as f:
+            files = {"file": (os.path.basename(path), f)}
+            response = requests.post(UPLOAD_URL, files=files)
+            response.raise_for_status()
+            data = response.json()
+            return f"Uploaded: {data.get('filename')}"
+    except Exception as e:
+        return f"Upload failed: {e}"
+
 
 def chat_with_ebook(message, history):
-    # 1. Format the request for your FastAPI endpoint
     payload = {"question": message}
-    
     try:
-        # 2. Send the request to your backend
         response = requests.post(API_URL, json=payload)
-        response.raise_for_status() # Raise error for 4xx/5xx codes
+        response.raise_for_status()
         data = response.json()
-        
-        # 3. Extract the answer and context
-        answer = data.get("answer", "No answer received.")
-        context = data.get("context_used", "")
-        
-        # We return the answer; Gradio handles the chat history automatically
-        return answer
-        
+        return data.get("answer", "No answer received.")
     except Exception as e:
         return f"Error: Could not connect to the AI server. ({e})"
 
-# Create the Gradio Interface (Remove 'theme' from here)
-demo = gr.ChatInterface(
-    fn=chat_with_ebook,
-    title="Agentic AI eBook Assistant",
-    description="Ask anything about the Agentic AI for Executives eBook. This bot uses Strict Grounding to ensure accuracy.",
-    examples=["What is the definition of Agentic AI?", "What value does it bring to businesses?"],
-    # theme="soft"  <-- DELETE THIS LINE FROM HERE
-)
+
+demo = gr.Blocks()
+with demo:
+    gr.Markdown("# Agentic AI eBook Assistant")
+    gr.Markdown("Upload a PDF, TXT, or DOCX file first, then ask questions about its content.")
+
+    with gr.Row():
+        file_input = gr.File(label="Upload document", file_types=[".pdf", ".txt", ".docx"])
+        upload_button = gr.Button("Upload Document")
+    upload_status = gr.Textbox(label="Upload Status", interactive=False)
+
+    upload_button.click(upload_document, inputs=file_input, outputs=upload_status)
+
+    gr.Markdown("---")
+
+    gr.ChatInterface(
+        fn=chat_with_ebook,
+        title="Agentic AI eBook Assistant",
+        description="Ask anything about the Agentic AI for Executives eBook. This bot uses Strict Grounding to ensure accuracy.",
+        examples=["What is the definition of Agentic AI?", "What value does it bring to businesses?"]
+    )
 
 if __name__ == "__main__":
-    # Move 'theme' to the launch() method instead
-    demo.launch(theme="soft", share=True)
+    demo.launch(server_name="0.0.0.0", server_port=7860, share=True)
