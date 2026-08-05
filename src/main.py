@@ -5,8 +5,11 @@ from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
+import gradio as gr
+
 from src.graph import app as graph_app
 from src.ingest import ingest_document
+from src.ui import demo  # Import your Gradio demo instance
 
 load_dotenv()
 app = FastAPI(
@@ -17,13 +20,13 @@ app = FastAPI(
 class Query(BaseModel):
     question: str
 
-@app.get("/")
-def read_root():
+# Optional health-check endpoint (moved off root)
+@app.get("/health")
+def health_check():
     return {"status": "active", "info": "Agentic AI RAG System"}
 
 @app.post("/ask")
 async def ask_question(query: Query):
-    # This calls your LangGraph
     inputs = {"question": query.question}
     try:
         result = await graph_app.ainvoke(inputs)
@@ -62,7 +65,10 @@ async def upload_document(file: UploadFile = File(...)):
         if tmp_path and os.path.exists(tmp_path):
             os.remove(tmp_path)
 
+# Mount Gradio interface directly at the root "/"
+app = gr.mount_gradio_app(app, demo, path="/")
+
 if __name__ == "__main__":
     import uvicorn
-    port = int(os.getenv("PORT", "8001"))
+    port = int(os.getenv("PORT", "7860"))
     uvicorn.run(app, host="0.0.0.0", port=port)
