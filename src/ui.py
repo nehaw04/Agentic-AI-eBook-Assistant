@@ -1,9 +1,8 @@
 import os
-import requests
+import asyncio
 import gradio as gr
-
-API_URL = os.getenv("API_URL", "http://127.0.0.1:8001/ask")
-UPLOAD_URL = os.getenv("UPLOAD_URL", "http://127.0.0.1:8001/upload")
+from src.graph import app as graph_app
+from src.ingest import ingest_document
 
 
 def upload_document(file):
@@ -12,12 +11,10 @@ def upload_document(file):
 
     path = file if isinstance(file, str) else file.name
     try:
-        with open(path, "rb") as f:
-            files = {"file": (os.path.basename(path), f)}
-            response = requests.post(UPLOAD_URL, files=files)
-            response.raise_for_status()
-            data = response.json()
-            return f"Uploaded: {data.get('filename')}"
+        # Directly call your backend ingestion pipeline
+        ingest_document(path)
+        filename = os.path.basename(path)
+        return f"Uploaded and indexed: {filename}"
     except Exception as e:
         return f"Upload failed: {e}"
 
@@ -25,12 +22,11 @@ def upload_document(file):
 def chat_with_ebook(message, history):
     payload = {"question": message}
     try:
-        response = requests.post(API_URL, json=payload)
-        response.raise_for_status()
-        data = response.json()
-        return data.get("answer", "No answer received.")
+        # Directly invoke your LangGraph workflow asynchronously
+        result = asyncio.run(graph_app.ainvoke(payload))
+        return result.get("answer", "No answer received.")
     except Exception as e:
-        return f"Error: Could not connect to the AI server. ({e})"
+        return f"Error: Could not process request. ({e})"
 
 
 demo = gr.Blocks()
