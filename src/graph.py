@@ -3,7 +3,7 @@ from typing import TypedDict
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_pinecone import PineconeVectorStore
 from langgraph.graph import StateGraph, END
-from .ingest import SlicedGeminiEmbeddings
+from src.ingest import SlicedGeminiEmbeddings
 
 
 # 1. Define the State

@@ -1,8 +1,8 @@
 import os
 import asyncio
 import gradio as gr
-from .graph import app as graph_app
-from .ingest import ingest_document
+from src.graph import app as graph_app
+from src.ingest import ingest_document
 
 
 def upload_document(file):
