@@ -9,8 +9,10 @@ from src.graph import app as graph_app
 from src.ingest import ingest_document
 
 load_dotenv()
-
-app = FastAPI(title="Agentic AI RAG API")
+app = FastAPI(
+    title="DocBuddy API",
+    description="Smart Document Assistant & RAG Engine",
+)
 
 class Query(BaseModel):
     question: str

@@ -35,7 +35,7 @@ def chat_with_ebook(message, history):
 
 demo = gr.Blocks()
 with demo:
-    gr.Markdown("# Agentic AI eBook Assistant")
+    
     gr.Markdown("Upload a PDF, TXT, or DOCX file first, then ask questions about its content.")
 
     with gr.Row():
@@ -49,9 +49,9 @@ with demo:
 
     gr.ChatInterface(
         fn=chat_with_ebook,
-        title="Agentic AI eBook Assistant",
-        description="Ask anything about the Agentic AI for Executives eBook. This bot uses Strict Grounding to ensure accuracy.",
-        examples=["What is the definition of Agentic AI?", "What value does it bring to businesses?"]
+        title="DocBuddy: Smart Document Assistant & RAG Engine",
+        description="This bot uses Strict Grounding to ensure accuracy.",
+        examples=["Summarise the Doc", "What is the central theme?"]
     )
 
 if __name__ == "__main__":

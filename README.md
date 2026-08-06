@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🤖 Agentic AI eBook Assistant
+# 🤖 DocBuddy - Smart Document Assistant & RAG Engine
 
 
 ### Agentic RAG: Autonomous Document Intelligence System
